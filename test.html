@@ -1,0 +1,40 @@
+<style>
+  canvas {
+    border: 1px solid #000;
+  }
+</style>
+<canvas width="500" height="500" id="canvas"></canvas>
+
+
+<script src="build/draw-line.js"></script>
+<script>
+  const w = 500;
+  const h = 500;
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const drawFn = (x, y, brightness) => {
+    const pxOffset = y * w * 4 + x * 4;
+    imageData.data[pxOffset] = 0;
+    imageData.data[pxOffset + 1] = 180;
+    imageData.data[pxOffset + 2] = 180;
+    imageData.data[pxOffset + 3] = Math.max(255, imageData.data[pxOffset + 3] + Math.floor(255 * brightness));
+  }
+  console.time('draw');
+  const imageData = ctx.getImageData(0, 0, w, h);
+  for (let i = 0; i < 10; i++) {
+    drawLine(drawFn, 0 | Math.random() * 500, 0 | Math.random() * 500, 0 | Math.random() * 500, 0 | Math.random() * 500, Math.random() * 20);
+  }
+  ctx.putImageData(imageData, 0, 0);
+  console.timeEnd('draw');
+
+  // console.time('canvas draw');
+  // for (let i = 0; i < 10; i++) {
+  //   ctx.strokeStyle = 'rgba(0, 180, 180, 255)';
+  //   ctx.lineWidth = Math.random() * 20;
+  //   ctx.beginPath();
+  //   ctx.moveTo(Math.random() * 500, Math.random() * 500);
+  //   ctx.lineTo(Math.random() * 500, Math.random() * 500);
+  //   ctx.stroke();
+  // }
+  // console.timeEnd('canvas draw');
+</script>

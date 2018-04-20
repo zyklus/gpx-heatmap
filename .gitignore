@@ -1,0 +1,14 @@
+# Dependencies
+/node_modules
+
+# Log files
+yarn-debug.log*
+yarn-error.log*
+npm-debug.log*
+
+# OSX nonsense
+**/.DS_Store
+**/Thumbs.db
+
+# Private
+gpx-files
